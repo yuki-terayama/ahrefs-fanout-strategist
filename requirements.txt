@@ -1,0 +1,5 @@
+google-api-python-client
+playwright
+python-dotenv
+openpyxl
+requests
