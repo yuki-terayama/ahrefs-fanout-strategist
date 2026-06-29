@@ -11,3 +11,13 @@ venv/
 output/*
 !output/.gitkeep
 *.log
+
+# Playwright永続Cookie（認証情報含む）
+.chrome_user_data/
+
+# 記事原稿（Google Docs納品で別管理）
+article/
+
+# テストデータ（Brand Radarからの実応答）
+input/*.csv
+!input/.gitkeep

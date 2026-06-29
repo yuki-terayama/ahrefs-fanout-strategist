@@ -20,15 +20,57 @@ Ahrefs Brand Radarのクエリファンアウト機能とClaude Codeを組み合
 
 ## セットアップ
 
+### 1. リポジトリのクローンと依存インストール
+
 ```bash
 git clone https://github.com/clearyst-inc/ahrefs-fanout-strategist.git
 cd ahrefs-fanout-strategist
 pip install -r requirements.txt
 cp .env.example .env
-# .env を編集してAPIキーを設定
 ```
 
-その後、`SKILL.md` を `~/.claude/skills/ahrefs-fanout-strategist/` に配置するか、Claude Codeの設定でこのリポジトリをスキルとして登録してください。
+### 2. Programmable Search Engine（PSE）の作成
+
+site:検索で自社サイト内の既存ページを抽出するために、自社サイト用のPSEを1個作成します。
+
+1. https://programmablesearchengine.google.com/ にアクセス
+2. 「+ 追加」をクリック
+3. 設定：
+   - 検索エンジン名：任意（例：`my-site-search`）
+   - 検索するサイト：**自社サイトのドメイン1個のみ**（例：`example.com`）
+   - 言語：日本語
+4. 「作成」をクリック
+5. 作成後、ダッシュボードで **Search engine ID** をコピー
+
+### 3. Google Custom Search API キーの発行
+
+1. [Google Cloud Console](https://console.cloud.google.com/) にアクセス
+2. プロジェクトを選択または新規作成
+3. [Custom Search API ライブラリ](https://console.cloud.google.com/apis/library/customsearch.googleapis.com) を開いて **有効にする**
+4. [認証情報](https://console.cloud.google.com/apis/credentials) を開いて **+ 認証情報を作成 → APIキー**
+5. 表示されたAPIキー（`AIza...`）をコピー
+
+公式ドキュメント: [Custom Search JSON API](https://developers.google.com/custom-search/v1/introduction)
+
+### 4. Ahrefs API キーの取得
+
+[Ahrefs API キー管理画面](https://app.ahrefs.com/account/api-keys) で **API キーを発行**してコピー。
+
+公式ドキュメント: [Ahrefs API v3 Brand Radar](https://docs.ahrefs.com/ja/api/reference/brand-radar)
+
+### 5. .env ファイルにAPIキー類を記入
+
+`.env` をエディタで開いて以下を設定：
+
+```
+AHREFS_API_KEY=（Step 4でコピーしたキー）
+GOOGLE_CUSTOM_SEARCH_API_KEY=（Step 3でコピーしたAPIキー）
+GOOGLE_CUSTOM_SEARCH_ENGINE_ID=（Step 2でコピーしたSearch engine ID）
+```
+
+### 6. スキルの登録
+
+`SKILL.md` を `~/.claude/skills/ahrefs-fanout-strategist/` に配置するか、Claude Codeの設定でこのリポジトリをスキルとして登録してください。
 
 ## 使い方
 
