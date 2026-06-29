@@ -23,7 +23,7 @@ Ahrefs Brand Radarのクエリファンアウト機能とClaude Codeを組み合
 ### 1. リポジトリのクローンと依存インストール
 
 ```bash
-git clone https://github.com/clearyst-inc/ahrefs-fanout-strategist.git
+git clone https://github.com/yuki-terayama/ahrefs-fanout-strategist.git
 cd ahrefs-fanout-strategist
 pip install -r requirements.txt
 cp .env.example .env
